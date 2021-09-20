@@ -12,10 +12,14 @@ class View:
               serialized_player['lastname'] + ' has been registred.')
 
     def display_new_tournament_infos(self, serialized_tournament):
-        print('New tournament ' + serialized_tournament['tournament_name'] + ' was created the ' +
-              serialized_tournament['tournament_date_start'] + ' for a total of ' +
-              str(serialized_tournament['tournament_rounds']) + ' rounds and ' +
-              str(len(serialized_tournament['tournament_players_list'])) + ' players.')
+        print('New tournament ' + serialized_tournament['tournament_name'] +
+              ' was created the ' +
+              serialized_tournament['tournament_date_start'] +
+              ' for a total of ' +
+              str(serialized_tournament['tournament_rounds']) +
+              ' rounds and ' +
+              str(len(serialized_tournament['tournament_players_list'])) +
+              ' players.')
 
     def ongoing_tournament_message(self):
         print('A tournament is already ongoing.')
@@ -27,21 +31,25 @@ class View:
         print('--- PLAYERS LIST ---')
         for count, player in enumerate(list_of_players, start=1):
             print(str(count) + ': ' + player['firstname'] +
-                  ' ' + player['lastname'] + " |" + " Rank: " + str(player['ranking']))
+                  ' ' + player['lastname'] + " |" +
+                  " Rank: " + str(player['ranking']))
         print('----------------------')
         print('')
 
     def display_all_tournaments(self, list_of_tournaments):
         print('--- TOURNAMENTS LIST ---')
         for count, tournament in enumerate(list_of_tournaments, start=1):
-            print(str(count) + ". " + tournament['tournament_name'] + " | " +
-                  tournament['tournament_place'] + " | " + str(tournament['tournament_date_start']) +
+            print(str(count) +
+                  ". " + tournament['tournament_name'] +
+                  " | " + tournament['tournament_place'] +
+                  " | " + str(tournament['tournament_date_start']) +
                   " | Turns: " + str(len(tournament['tournament_turns'])))
         print('----------------------')
         print('')
 
     def display_tournament_round(self, pair):
-        print(pair[0]['firstname'] + ' VS ' + pair[1]['firstname'])
+        print(pair[0]['firstname'] +
+              ' VS ' + pair[1]['firstname'])
 
     def continue_tournament_turns(self):
         print("Turn is over, do you wanna continue or quit ?")
@@ -76,9 +84,13 @@ class View:
             print(' ')
             print('ROUND N° ' + str(roundCount))
             for matchCount, match in enumerate(turn['Round'+str(roundCount)], start=1):
-                print(str(matchCount)+"." + match[0]['firstname'] +
-                      ' ' + match[0]['lastname'] + ' ' + str(match[0]['points']) +
-                      ' VS ' + match[1]['firstname'] + ' ' + match[1]['lastname'] +
-                      ' ' + str(match[1]['points']))
+                print(
+                    str(matchCount) + "." +
+                    match[0]['firstname'] +
+                    ' ' + match[0]['lastname'] +
+                    ' ' + str(match[0]['points']) +
+                    ' VS ' + match[1]['firstname'] +
+                    ' ' + match[1]['lastname'] + ' ' +
+                    str(match[1]['points']))
         print('----------------------')
         print(' ')

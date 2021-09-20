@@ -13,7 +13,8 @@ class PlayerController:
                 datetime.datetime.strptime(player_birthdate_input, "%d/%m/%Y")
                 return player_birthdate_input
             except ValueError:
-                print('Asking for %d/%m/%Y format, ' + str(player_birthdate_input) + ' given.')
+                print('Asking for %d/%m/%Y format, ' +
+                      str(player_birthdate_input) + ' given.')
                 continue
             except TypeError:
                 print("Value must be minimum 3 characters and letters only.")
@@ -42,8 +43,10 @@ class PlayerController:
     def set_player_gender(self):
         while True:
             try:
-                gender_input = str(input('Player gender: [M]ale or [F]emale ?: '))
-                if gender_input.lower() == "m" or "f" and len(gender_input) == 1:
+                gender_input = str(input("Player gender: [M]ale "
+                                         "or [F]emale ?: "))
+                if gender_input.lower() == "m" or\
+                        "f" and len(gender_input) == 1:
                     return gender_input.capitalize()
                 else:
                     print("Choose between [M] or [F].")
@@ -77,7 +80,8 @@ class PlayerController:
         player_ranking = int(input('Choisis un ranking: '))
 
         new_player = PlayerModel(player_lastname, player_firstname,
-                                 player_birthdate, player_gender, player_ranking, 0)
+                                 player_birthdate, player_gender,
+                                 player_ranking, 0)
 
         # Serializing the new created player
         serialized_player = self.serialize_player(new_player)
@@ -87,5 +91,3 @@ class PlayerController:
 
         # Displaying info of the new player created
         View().display_new_player_infos(serialized_player)
-
-

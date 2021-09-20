@@ -14,5 +14,3 @@ class TournamentModel:
         self.time_control = time_control
         self.description = description
         self.ongoing = ongoing
-
-
