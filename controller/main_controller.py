@@ -19,7 +19,10 @@ class Controller:
             elif val == "2":
                 self.tournamentController.insert_new_tournament()
             elif val == "3":
-                self.tournamentController.get_ongoing_tournaments()
+                ongoing_tournaments = self.tournamentController.\
+                    get_ongoing_tournaments()
+                if ongoing_tournaments == -1:
+                    self.main_menu()
             elif val == "4":
                 self.reports_menu()
             elif val == "5":

@@ -49,10 +49,13 @@ class TournamentController:
             try:
                 answer = int(input('Which tournament '
                                    'do you wanna continue ?.'))
+                print(answer)
                 if 0 < answer <= len(get_all_ongoing_tournament):
                     tournament = get_all_ongoing_tournament[answer - 1]
                     print('We continue the tournament ' + str(answer))
-                    self.play_tournament(tournament)
+                    play_tournament = self.play_tournament(tournament)
+                    if play_tournament == -1:
+                        return -1
                 else:
                     raise Exception
             except Exception as e:
@@ -159,7 +162,7 @@ class TournamentController:
                     print('Tournament is over')
                     DatabaseModel('tournamentTable').\
                         end_tournament(tournament['tournament_name'])
-                    return
+                    return -1
                 else:
                     result = []
                     # Preparing the pairs for the different match
@@ -189,7 +192,7 @@ class TournamentController:
                         continue
                     elif continue_tournament == '2':
                         print('Leaving tournament.')
-                        return
+                        return -1
         except TypeError:
             print('Error, expecting number got string instead.')
         except EOFError:
@@ -214,7 +217,7 @@ class TournamentController:
         while count < len(pairs):
             try:
                 View().display_tournament_round(pairs[count])
-                round_result = input('Who\'s the winner of this round')
+                round_result = input('Who\'s the winner of this round: ')
                 if round_result == '1' or\
                         round_result == '2' or\
                         round_result == '3':
@@ -297,6 +300,9 @@ class TournamentController:
                 # Forming many pairs with players
                 # 1 from superior and 1 inferior part
                 pairs = zip(superior_players, inferior_players)
+                for pair in pairs:
+                    print(pair)
+
                 return pairs
         except TypeError:
             print('Error, expecting number got string instead.')

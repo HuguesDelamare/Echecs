@@ -83,7 +83,9 @@ class View:
         for roundCount, turn in enumerate(list_of_turns, start=1):
             print(' ')
             print('ROUND N° ' + str(roundCount))
-            for matchCount, match in enumerate(turn['Round'+str(roundCount)], start=1):
+            for matchCount, \
+                match in enumerate(turn['Round'+str(roundCount)],
+                                   start=1):
                 print(
                     str(matchCount) + "." +
                     match[0]['firstname'] +
