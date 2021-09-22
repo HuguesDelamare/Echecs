@@ -149,19 +149,13 @@ class TournamentController:
     # Method to play the 4 turns in the tournament, calling multiple methods
     def play_tournament(self, tournament):
         try:
-            turns_count = \
-                DatabaseModel('TournamentTable').\
-                get_tournament_turn_count(tournament)
             serialized_players_list = \
                 self.serialized_players_for_turns(tournament)
-
             while True:
-                if turns_count == 5:
-                    print('Tournament is over')
-                    DatabaseModel('tournamentTable').\
-                        end_tournament(tournament['tournament_name'])
-                    return -1
-                else:
+                turns_count = \
+                    DatabaseModel('TournamentTable'). \
+                    get_tournament_turn_count(tournament)
+                if turns_count < 4:
                     result = []
                     # Preparing the pairs for the different match
                     pairs = \
@@ -191,6 +185,29 @@ class TournamentController:
                     elif continue_tournament == '2':
                         print('Leaving tournament.')
                         return -1
+                elif turns_count == 4:
+                    result = []
+                    # Preparing the pairs for the different match
+                    pairs = \
+                        self.creating_pairs(serialized_players_list,
+                                            turns_count,
+                                            tournament['tournament_name'])
+                    print('Turn ' + str(turns_count))
+
+                    # Playing the turn with the new made pairs
+                    played_turn = self.play_tournament_turn(pairs, turns_count)
+
+                    # We append the played turned in our tournament turn list
+                    result.append(played_turn)
+
+                    # We update the result of the actual tournament
+                    # with the new turns results
+                    self.update_tournament_turn(tournament, result)
+
+                    print('Tournament is over')
+                    DatabaseModel('tournamentTable'). \
+                        end_tournament(tournament['tournament_name'])
+                    return -1
         except TypeError:
             print('Error, expecting number got string instead.')
         except EOFError:
