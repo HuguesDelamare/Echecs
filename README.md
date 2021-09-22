@@ -91,8 +91,11 @@ The environement is functional we can now start the project:
 	> py main.py
 
 The project should start and you'll see infos of the script progression in your terminal.	
-
+Here is a command line to create a html flake8 report.Don't forget to exclude your environement(env or venv) folder to avoid extra errors messages.
+	
+	> flake8 --format=html --htmldir=flake-report --exclude= "your path to the env folder in project"
+	
 ## Contributor
   This application has been developped by [myself](https://github.com/HuguesDelamare).
-  A big thank you to my mentor Alexi for helping me develop the project.
+  A big thank you to my mentor Alexandre Iwanesko  for helping me during the project.
 
