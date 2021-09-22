@@ -48,21 +48,19 @@ class TournamentController:
         while get_all_ongoing_tournament:
             try:
                 answer = int(input('Which tournament '
-                                   'do you wanna continue ?.'))
-                print(answer)
+                                   'do you wanna continue ?. '))
                 if 0 < answer <= len(get_all_ongoing_tournament):
                     tournament = get_all_ongoing_tournament[answer - 1]
                     print('We continue the tournament ' + str(answer))
                     play_tournament = self.play_tournament(tournament)
                     if play_tournament == -1:
-                        return -1
-                else:
-                    raise Exception
-            except Exception as e:
-                print(e)
+                        return
+            except ValueError:
+                print('Error, expecting int not string type.')
                 continue
         if not get_all_ongoing_tournament:
             print('No tournament ongoing.')
+
 
     # Selecting the time control of the tournament
     def set_time_control(self):
@@ -300,8 +298,6 @@ class TournamentController:
                 # Forming many pairs with players
                 # 1 from superior and 1 inferior part
                 pairs = zip(superior_players, inferior_players)
-                for pair in pairs:
-                    print(pair)
 
                 return pairs
         except TypeError:
@@ -338,7 +334,7 @@ class TournamentController:
     def get_all_match_from_tournament(self):
         tournament_list = DatabaseModel('TournamentTable').get_all_tournament()
         View().display_all_tournaments(tournament_list)
-        answer = int(input('Which tournament do you wanna select ? : '))
+        answer = int(input('Which tournament do you wanna select ?: '))
         tournament_turns = DatabaseModel('TournamentTable').\
             get_all_turns_from_tournament(answer)
         View().display_tournament_match(tournament_turns)
@@ -346,7 +342,7 @@ class TournamentController:
     def get_all_turns_from_tournament(self):
         tournament_list = DatabaseModel('TournamentTable').get_all_tournament()
         View().display_all_tournaments(tournament_list)
-        answer = int(input('Which tournament do you wanna select ? : '))
+        answer = int(input('Which tournament do you wanna select ?: '))
         tournament_turns = DatabaseModel('TournamentTable').\
             get_all_turns_from_tournament(answer)
         View().display_tournament_turns(tournament_turns)
