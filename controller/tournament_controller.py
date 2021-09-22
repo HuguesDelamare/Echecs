@@ -139,7 +139,9 @@ class TournamentController:
                 lower()
             if answer == "y":
                 print("The tournament will start now.")
-                self.play_tournament(serialized_tournament)
+                play_tournament = self.play_tournament(serialized_tournament)
+                if play_tournament == -1:
+                    return
             elif answer == "n":
                 return
             else:
